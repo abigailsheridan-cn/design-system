@@ -25,6 +25,19 @@ import {
   AlertDescription,
   Toaster,
   toast,
+  Label,
+  Textarea,
+  Switch,
+  RadioGroup,
+  RadioGroupItem,
+  Separator,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardAction,
+  CardContent,
+  CardFooter,
 } from '../src'
 import { Plus, ArrowRight, Terminal, TriangleAlert } from 'lucide-react'
 
@@ -212,6 +225,80 @@ function Demo() {
           </Button>
         </div>
         <Toaster />
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Label &amp; Textarea</h2>
+        <div className="flex flex-col gap-1.5 max-w-sm">
+          <Label htmlFor="bio">Bio</Label>
+          <Textarea id="bio" placeholder="Tell us about yourself" />
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Switch</h2>
+        <div className="flex gap-6 items-center">
+          <div className="flex items-center gap-2">
+            <Switch id="s1" />
+            <Label htmlFor="s1">Off</Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch id="s2" defaultChecked />
+            <Label htmlFor="s2">On</Label>
+          </div>
+          <div className="flex items-center gap-2 opacity-50">
+            <Switch id="s3" disabled />
+            <Label htmlFor="s3">Disabled</Label>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Radio Group</h2>
+        <RadioGroup defaultValue="card" className="flex gap-6">
+          <div className="flex items-center gap-2">
+            <RadioGroupItem value="card" id="r1" />
+            <Label htmlFor="r1">Card</Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <RadioGroupItem value="paypal" id="r2" />
+            <Label htmlFor="r2">PayPal</Label>
+          </div>
+          <div className="flex items-center gap-2 opacity-50">
+            <RadioGroupItem value="crypto" id="r3" disabled />
+            <Label htmlFor="r3">Crypto</Label>
+          </div>
+        </RadioGroup>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Separator</h2>
+        <div className="max-w-sm">
+          <p className="text-sm">Above the separator</p>
+          <Separator className="my-3" />
+          <p className="text-sm">Below the separator</p>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Card</h2>
+        <Card className="max-w-sm">
+          <CardHeader>
+            <CardTitle>Team members</CardTitle>
+            <CardDescription>Invite people to collaborate.</CardDescription>
+            <CardAction>
+              <Button variant="ghost" size="sm">
+                Manage
+              </Button>
+            </CardAction>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground">3 members, 1 pending invite.</p>
+          </CardContent>
+          <CardFooter>
+            <Button size="sm">Invite</Button>
+          </CardFooter>
+        </Card>
       </section>
     </div>
   )

@@ -9,6 +9,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
 import { Alert, AlertTitle, AlertDescription } from './alert'
 import { Toaster, toast } from './toast'
+import { Label } from './label'
+import { Textarea } from './textarea'
+import { Switch } from './switch'
+import { RadioGroup, RadioGroupItem } from './radio-group'
+import { Separator } from './separator'
+import { Card, CardHeader, CardTitle, CardContent } from './card'
 
 describe('Button', () => {
   it('renders children and applies the variant', () => {
@@ -110,5 +116,66 @@ describe('Toaster', () => {
       toast.add({ description: 'Saved successfully' })
     })
     expect(await screen.findByText('Saved successfully')).toBeDefined()
+  })
+})
+
+describe('Label', () => {
+  it('associates with a form control via htmlFor', () => {
+    render(
+      <>
+        <Label htmlFor="bio">Bio</Label>
+        <Textarea id="bio" />
+      </>,
+    )
+    expect(screen.getByLabelText('Bio')).toBeDefined()
+  })
+})
+
+describe('Textarea', () => {
+  it('renders with a placeholder', () => {
+    render(<Textarea placeholder="Tell us about yourself" />)
+    expect(screen.getByPlaceholderText('Tell us about yourself')).toBeDefined()
+  })
+})
+
+describe('Switch', () => {
+  it('renders unchecked by default', () => {
+    render(<Switch aria-label="Notifications" />)
+    expect(screen.getByRole('switch')).toHaveAttribute('aria-checked', 'false')
+  })
+})
+
+describe('RadioGroup', () => {
+  it('marks the default value as checked', () => {
+    render(
+      <RadioGroup defaultValue="card">
+        <RadioGroupItem value="card" aria-label="Card" />
+        <RadioGroupItem value="paypal" aria-label="PayPal" />
+      </RadioGroup>,
+    )
+    expect(screen.getByRole('radio', { name: 'Card' })).toHaveAttribute('aria-checked', 'true')
+    expect(screen.getByRole('radio', { name: 'PayPal' })).toHaveAttribute('aria-checked', 'false')
+  })
+})
+
+describe('Separator', () => {
+  it('renders', () => {
+    const { container } = render(<Separator />)
+    expect(container.querySelector('[data-slot="separator"]')).toBeDefined()
+  })
+})
+
+describe('Card', () => {
+  it('renders header and content', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle>Team members</CardTitle>
+        </CardHeader>
+        <CardContent>3 members</CardContent>
+      </Card>,
+    )
+    expect(screen.getByText('Team members')).toBeDefined()
+    expect(screen.getByText('3 members')).toBeDefined()
   })
 })
