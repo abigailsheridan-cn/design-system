@@ -12,4 +12,19 @@ describe('Button', () => {
     render(<Button variant="secondary">Secondary</Button>)
     expect(screen.getByRole('button').className).toContain('ds-button--secondary')
   })
+
+  it('renders iconLeft and iconRight when provided', () => {
+    render(
+      <Button iconLeft={<svg data-testid="icon-left" />} iconRight={<svg data-testid="icon-right" />}>
+        Save
+      </Button>,
+    )
+    expect(screen.getByTestId('icon-left')).toBeDefined()
+    expect(screen.getByTestId('icon-right')).toBeDefined()
+  })
+
+  it('omits icon wrappers when no icons are provided', () => {
+    render(<Button>Save</Button>)
+    expect(document.querySelector('.ds-button__icon')).toBeNull()
+  })
 })

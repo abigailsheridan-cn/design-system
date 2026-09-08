@@ -12,13 +12,13 @@
   --color-neutral-800: #26292c;
   --color-neutral-900: #151719;
 
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #dfe6ff;
-  --color-brand-300: #a6b6ff;
-  --color-brand-500: #5b6ef5;
-  --color-brand-600: #4453d6;
-  --color-brand-700: #3641ad;
-  --color-brand-900: #1f2266;
+  --color-brand-50: #e9f5fc;
+  --color-brand-100: #d3eaf8;
+  --color-brand-300: #8ccaee;
+  --color-brand-500: #1a79af;
+  --color-brand-600: #15628e;
+  --color-brand-700: #114f73;
+  --color-brand-900: #0a2e43;
 
   --color-success-100: #e2f7e9;
   --color-success-500: #22a35a;
@@ -64,4 +64,27 @@
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.75;
+
+  /* Semantic — soft/subtle backgrounds + matching text, added for Badge */
+  --color-bg-neutral-subtle: #eceef0;
+  --color-bg-brand-subtle: #d3eaf8;
+  --color-bg-success-subtle: #e2f7e9;
+  --color-bg-warning-subtle: #fff4e0;
+  --color-bg-danger-subtle: #fde3e2;
+  --color-text-brand: #114f73;
+  --color-text-success: #166a3a;
+  --color-text-warning: #8f5b16;
+  --color-text-danger: #8f231c;
+
+  /* Semantic — previously referenced by Checkbox/Input/Dropdown/Menu/Button but never
+     defined here, so these were silently resolving to black/transparent. Fixing now. */
+  --color-border-default: #b1b8bf;
+  --color-bg-default-default: #ffffff;
+  --color-text-default: #383d42;
+  --color-text-inverse: #ffffff;
+  --color-bg-brand-default: #1a79af;
+  --color-bg-danger-default: #e0392f;
+
+  /* Elevation — added for Menu's floating list */
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
