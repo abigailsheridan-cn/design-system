@@ -196,8 +196,18 @@ function Demo() {
           <Button variant="outline" onClick={() => toast.error('Something went wrong')}>
             Error
           </Button>
+          <Button
+            variant="outline"
+            onClick={() =>
+              toast('Event has been deleted', {
+                action: { label: 'Undo', onClick: () => {} },
+              })
+            }
+          >
+            With action
+          </Button>
         </div>
-        <Toaster />
+        <Toaster closeButton />
       </section>
     </div>
   )
