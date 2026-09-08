@@ -6,6 +6,9 @@ import { Checkbox } from './checkbox'
 import { Input } from './input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
+import { Alert, AlertTitle, AlertDescription } from './alert'
+import { Toaster } from './sonner'
 
 describe('Button', () => {
   it('renders children and applies the variant', () => {
@@ -66,5 +69,42 @@ describe('DropdownMenu', () => {
       </DropdownMenu>,
     )
     expect(screen.getByRole('button', { name: 'Actions' })).toBeDefined()
+  })
+})
+
+describe('Tooltip', () => {
+  it('renders the trigger', () => {
+    render(
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button>Hover me</Button>
+          </TooltipTrigger>
+          <TooltipContent>Helpful info</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>,
+    )
+    expect(screen.getByRole('button', { name: 'Hover me' })).toBeDefined()
+  })
+})
+
+describe('Alert', () => {
+  it('renders the title and description', () => {
+    render(
+      <Alert variant="destructive">
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>Something went wrong.</AlertDescription>
+      </Alert>,
+    )
+    expect(screen.getByText('Error')).toBeDefined()
+    expect(screen.getByText('Something went wrong.')).toBeDefined()
+    expect(screen.getByRole('alert').dataset.slot).toBe('alert')
+  })
+})
+
+describe('Toaster', () => {
+  it('renders without crashing', () => {
+    const { container } = render(<Toaster />)
+    expect(container).toBeDefined()
   })
 })

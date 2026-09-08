@@ -16,8 +16,17 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  Toaster,
 } from '../src'
-import { Plus, ArrowRight } from 'lucide-react'
+import { Plus, ArrowRight, Terminal, TriangleAlert } from 'lucide-react'
+import { toast } from 'sonner'
 
 function Demo() {
   return (
@@ -143,6 +152,52 @@ function Demo() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Tooltip</h2>
+        <TooltipProvider>
+          <div className="flex gap-3 items-center">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline">Hover me</Button>
+              </TooltipTrigger>
+              <TooltipContent>Helpful info goes here</TooltipContent>
+            </Tooltip>
+          </div>
+        </TooltipProvider>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Alert</h2>
+        <div className="flex flex-col gap-3 max-w-md">
+          <Alert>
+            <Terminal />
+            <AlertTitle>Heads up!</AlertTitle>
+            <AlertDescription>You can add components to your app using the CLI.</AlertDescription>
+          </Alert>
+          <Alert variant="destructive">
+            <TriangleAlert />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>Your session has expired. Please log in again.</AlertDescription>
+          </Alert>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Toast</h2>
+        <div className="flex gap-3 items-center">
+          <Button variant="outline" onClick={() => toast('Event has been created')}>
+            Default
+          </Button>
+          <Button variant="outline" onClick={() => toast.success('Changes saved successfully')}>
+            Success
+          </Button>
+          <Button variant="outline" onClick={() => toast.error('Something went wrong')}>
+            Error
+          </Button>
+        </div>
+        <Toaster />
       </section>
     </div>
   )
