@@ -1,111 +1,149 @@
 import { createRoot } from 'react-dom/client'
-import { Button, Badge, Checkbox, Input, Dropdown, Menu } from '../src'
-
-function PlusIcon() {
-  return (
-    <svg viewBox="0 0 16 16" fill="none">
-      <path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 16 16" fill="none">
-      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
+import '../src/index.css'
+import {
+  Button,
+  Badge,
+  Checkbox,
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '../src'
+import { Plus, ArrowRight } from 'lucide-react'
 
 function Demo() {
   return (
-    <div style={{ padding: 32, fontFamily: 'sans-serif' }}>
-      <h1>Design System Demo</h1>
+    <div className="p-8 flex flex-col gap-10 font-sans max-w-3xl">
+      <h1 className="text-3xl font-bold">Design System Demo (shadcn/ui)</h1>
 
-      <h2>Variants</h2>
-      <div style={{ display: 'flex', gap: 12 }}>
-        <Button variant="primary">Primary</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="danger">Danger</Button>
-        <Button variant="primary" disabled>
-          Disabled
-        </Button>
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Button variants</h2>
+        <div className="flex gap-3 items-center">
+          <Button>Default</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="link">Link</Button>
+          <Button disabled>Disabled</Button>
+        </div>
+      </section>
 
-      <h2>Icons</h2>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <Button iconLeft={<PlusIcon />}>Add item</Button>
-        <Button iconRight={<ArrowIcon />}>Next</Button>
-        <Button iconLeft={<PlusIcon />} iconRight={<ArrowIcon />}>
-          Both
-        </Button>
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Button sizes &amp; icons</h2>
+        <div className="flex gap-3 items-center">
+          <Button size="xs">Extra small</Button>
+          <Button size="sm">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="lg">Large</Button>
+          <Button>
+            <Plus /> Add item
+          </Button>
+          <Button variant="secondary">
+            Next <ArrowRight />
+          </Button>
+        </div>
+      </section>
 
-      <h2>Sizes</h2>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <Button size="sm">Small</Button>
-        <Button size="md">Medium</Button>
-        <Button size="lg">Large</Button>
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Badge</h2>
+        <div className="flex gap-3 items-center">
+          <Badge>Default</Badge>
+          <Badge variant="secondary">Secondary</Badge>
+          <Badge variant="outline">Outline</Badge>
+          <Badge variant="destructive">Destructive</Badge>
+        </div>
+      </section>
 
-      <h2>Badge</h2>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <Badge variant="neutral">Neutral</Badge>
-        <Badge variant="brand">Brand</Badge>
-        <Badge variant="success">Success</Badge>
-        <Badge variant="warning">Warning</Badge>
-        <Badge variant="danger">Danger</Badge>
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Checkbox</h2>
+        <div className="flex gap-6 items-center">
+          <label className="flex items-center gap-2">
+            <Checkbox id="c1" /> Unchecked
+          </label>
+          <label className="flex items-center gap-2">
+            <Checkbox id="c2" defaultChecked /> Checked
+          </label>
+          <label className="flex items-center gap-2 opacity-50">
+            <Checkbox id="c3" disabled /> Disabled
+          </label>
+        </div>
+      </section>
 
-      <h2>Checkbox</h2>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <Checkbox id="c1" label="Unchecked" />
-        <Checkbox id="c2" label="Checked" defaultChecked />
-        <Checkbox id="c3" label="Disabled" disabled />
-        <Checkbox id="c4" label="Disabled checked" disabled defaultChecked />
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Input</h2>
+        <div className="flex gap-3 items-start">
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="name" className="text-sm font-medium">
+              Name
+            </label>
+            <Input id="name" placeholder="Jane Doe" />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="email" className="text-sm font-medium">
+              Email
+            </label>
+            <Input id="email" aria-invalid placeholder="you@example.com" />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="disabled-input" className="text-sm font-medium">
+              Disabled
+            </label>
+            <Input id="disabled-input" disabled placeholder="Can't edit" />
+          </div>
+        </div>
+      </section>
 
-      <h2>Input</h2>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-        <Input label="Name" placeholder="Jane Doe" />
-        <Input label="Email" error="Required" />
-        <Input label="Disabled" disabled placeholder="Can't edit" />
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Select</h2>
+        <Select defaultValue="us">
+          <SelectTrigger className="w-48">
+            <SelectValue placeholder="Country" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="us">United States</SelectItem>
+            <SelectItem value="ca">Canada</SelectItem>
+          </SelectContent>
+        </Select>
+      </section>
 
-      <h2>Dropdown</h2>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-        <Dropdown label="Country">
-          <option value="us">United States</option>
-          <option value="ca">Canada</option>
-        </Dropdown>
-        <Dropdown label="Country" error="Required">
-          <option value="">Select...</option>
-        </Dropdown>
-        <Dropdown label="Disabled" disabled>
-          <option value="">Can't edit</option>
-        </Dropdown>
-      </div>
+      <section className="flex flex-col gap-3">
+        <h2 className="text-xl font-semibold">Dropdown menu</h2>
+        <div className="flex gap-3 items-center">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary">Actions</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem>Duplicate</DropdownMenuItem>
+              <DropdownMenuItem disabled>Archive</DropdownMenuItem>
+              <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-      <h2>Menu</h2>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <Menu
-          label="Actions"
-          items={[
-            { label: 'Edit' },
-            { label: 'Duplicate' },
-            { label: 'Archive', disabled: true },
-            { label: 'Delete' },
-          ]}
-        />
-        <Menu
-          label="Sort by"
-          items={[
-            { label: 'Name', selected: true },
-            { label: 'Date modified', selected: false },
-            { label: 'Size', selected: false },
-          ]}
-        />
-      </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary">Sort by</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuRadioGroup value="name">
+                <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="date">Date modified</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="size">Size</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </section>
     </div>
   )
 }

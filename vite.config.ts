@@ -2,10 +2,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
+import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'node:path'
 
 export default defineConfig({
-  plugins: [react(), dts({ include: ['src'] })],
+  plugins: [react(), tailwindcss(), dts({ include: ['src'] })],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
