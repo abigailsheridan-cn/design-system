@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
 import { Button } from './button'
 import { Badge } from './badge'
 import { Checkbox } from './checkbox'
@@ -8,14 +8,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
 import { Alert, AlertTitle, AlertDescription } from './alert'
-import { Toaster } from './sonner'
+import { Toaster, toast } from './toast'
 
 describe('Button', () => {
   it('renders children and applies the variant', () => {
     render(<Button variant="secondary">Click me</Button>)
     const button = screen.getByRole('button', { name: 'Click me' })
     expect(button).toBeDefined()
-    expect(button.dataset.variant).toBe('secondary')
+    expect(button.className).toContain('bg-secondary')
   })
 })
 
@@ -29,7 +29,7 @@ describe('Badge', () => {
 describe('Checkbox', () => {
   it('renders unchecked by default', () => {
     render(<Checkbox aria-label="Accept" />)
-    expect(screen.getByRole('checkbox')).toHaveAttribute('data-state', 'unchecked')
+    expect(screen.getByRole('checkbox')).toHaveAttribute('aria-checked', 'false')
   })
 })
 
@@ -60,9 +60,7 @@ describe('DropdownMenu', () => {
   it('renders the trigger', () => {
     render(
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button>Actions</Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger render={<Button />}>Actions</DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem>Edit</DropdownMenuItem>
         </DropdownMenuContent>
@@ -77,9 +75,7 @@ describe('Tooltip', () => {
     render(
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger asChild>
-            <Button>Hover me</Button>
-          </TooltipTrigger>
+          <TooltipTrigger render={<Button />}>Hover me</TooltipTrigger>
           <TooltipContent>Helpful info</TooltipContent>
         </Tooltip>
       </TooltipProvider>,
@@ -106,5 +102,13 @@ describe('Toaster', () => {
   it('renders without crashing', () => {
     const { container } = render(<Toaster />)
     expect(container).toBeDefined()
+  })
+
+  it('shows a toast added via toast.add()', async () => {
+    render(<Toaster />)
+    await act(async () => {
+      toast.add({ description: 'Saved successfully' })
+    })
+    expect(await screen.findByText('Saved successfully')).toBeDefined()
   })
 })

@@ -24,9 +24,11 @@ import {
   AlertTitle,
   AlertDescription,
   Toaster,
+  toast,
 } from '../src'
 import { Plus, ArrowRight, Terminal, TriangleAlert } from 'lucide-react'
-import { toast } from 'sonner'
+
+const COUNTRY_LABELS: Record<string, string> = { us: 'United States', ca: 'Canada' }
 
 function Demo() {
   return (
@@ -115,7 +117,11 @@ function Demo() {
         <h2 className="text-xl font-semibold">Select</h2>
         <Select defaultValue="us">
           <SelectTrigger className="w-48">
-            <SelectValue placeholder="Country" />
+            {/* Base UI's SelectValue shows the raw value by default (unlike Radix,
+                which auto-resolves the matched item's label) — map it explicitly. */}
+            <SelectValue placeholder="Country">
+              {(value: string | null) => (value ? COUNTRY_LABELS[value] : 'Country')}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="us">United States</SelectItem>
@@ -128,9 +134,7 @@ function Demo() {
         <h2 className="text-xl font-semibold">Dropdown menu</h2>
         <div className="flex gap-3 items-center">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary">Actions</Button>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger render={<Button variant="secondary" />}>Actions</DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem>Edit</DropdownMenuItem>
               <DropdownMenuItem>Duplicate</DropdownMenuItem>
@@ -140,9 +144,7 @@ function Demo() {
           </DropdownMenu>
 
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary">Sort by</Button>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger render={<Button variant="secondary" />}>Sort by</DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuRadioGroup value="name">
                 <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
@@ -159,9 +161,7 @@ function Demo() {
         <TooltipProvider>
           <div className="flex gap-3 items-center">
             <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline">Hover me</Button>
-              </TooltipTrigger>
+              <TooltipTrigger render={<Button variant="outline" />}>Hover me</TooltipTrigger>
               <TooltipContent>Helpful info goes here</TooltipContent>
             </Tooltip>
           </div>
@@ -187,27 +187,31 @@ function Demo() {
       <section className="flex flex-col gap-3">
         <h2 className="text-xl font-semibold">Toast</h2>
         <div className="flex gap-3 items-center">
-          <Button variant="outline" onClick={() => toast('Event has been created')}>
+          <Button variant="outline" onClick={() => toast.add({ description: 'Event has been created' })}>
             Default
           </Button>
-          <Button variant="outline" onClick={() => toast.success('Changes saved successfully')}>
+          <Button
+            variant="outline"
+            onClick={() => toast.add({ type: 'success', description: 'Changes saved successfully' })}
+          >
             Success
           </Button>
-          <Button variant="outline" onClick={() => toast.error('Something went wrong')}>
+          <Button variant="outline" onClick={() => toast.add({ type: 'error', description: 'Something went wrong' })}>
             Error
           </Button>
           <Button
             variant="outline"
             onClick={() =>
-              toast('Event has been deleted', {
-                action: { label: 'Undo', onClick: () => {} },
+              toast.add({
+                description: 'Event has been deleted',
+                actionProps: { children: 'Undo', onClick: () => {} },
               })
             }
           >
             With action
           </Button>
         </div>
-        <Toaster closeButton />
+        <Toaster />
       </section>
     </div>
   )
