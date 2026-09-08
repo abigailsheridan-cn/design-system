@@ -1,0 +1,67 @@
+/* CSS custom properties mirroring src/tokens/*.ts — keep these in sync by hand until a token build step is added. */
+:root {
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f7f7f8;
+  --color-neutral-100: #eceef0;
+  --color-neutral-200: #d5d9dd;
+  --color-neutral-300: #b1b8bf;
+  --color-neutral-400: #848d96;
+  --color-neutral-500: #5f6870;
+  --color-neutral-600: #495056;
+  --color-neutral-700: #383d42;
+  --color-neutral-800: #26292c;
+  --color-neutral-900: #151719;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #dfe6ff;
+  --color-brand-300: #a6b6ff;
+  --color-brand-500: #5b6ef5;
+  --color-brand-600: #4453d6;
+  --color-brand-700: #3641ad;
+  --color-brand-900: #1f2266;
+
+  --color-success-100: #e2f7e9;
+  --color-success-500: #22a35a;
+  --color-success-700: #166a3a;
+
+  --color-warning-100: #fff4e0;
+  --color-warning-500: #e0952f;
+  --color-warning-700: #8f5b16;
+
+  --color-danger-100: #fde3e2;
+  --color-danger-500: #e0392f;
+  --color-danger-700: #8f231c;
+
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+}
